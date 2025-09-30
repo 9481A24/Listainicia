@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plano de Trabalho - Sistema Supermercado</title>
+  <style>
+    body { font-family: Arial, Helvetica, sans-serif; background:#f6f7fb; color:#111; padding:20px; }
+    .container { max-width:1000px; margin:0 auto; background:#fff; padding:24px; border-radius:12px; box-shadow:0 8px 30px rgba(15,20,30,0.08); }
+    h1 { color:#ff9900; }
+    pre { white-space:pre-wrap; font-size:15px; line-height:1.45; }
+    .note { font-size:13px; color:#555; margin-top:12px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Plano de trabalho por fases (alto nível)</h1>
+    <pre>Perfeito — vou listar **tudo** de forma organizada: fases, tarefas por parte (quem faz o quê), recursos necessários e tempos estimados. Vou também trazer **duas opções de escopo** (MVP rápido vs produto completo) com prazos diferentes — assim você escolhe e a gente já inicia.
+
+# Visão geral (objetivo)
+Construir um **sistema multi-usuário para supermercados** com login/senha, controle de estoque, vendas, painel administrativo e cobrança de mensalidade. O sistema será multi-tenant (cada supermercado tem seus dados isolados) e terá painel de administração para você gerenciar assinantes/pagamentos.
+
+---
+
+# Plano de trabalho por fases (alto nível)
+1. **Descoberta / Requisitos**
+   - O que fazer: levantamento de requisitos, definição de planos e regras de negócio (planos, limites, recursos por plano).
+   - Entregável: documento de requisitos + roadmap detalhado.
+   - Tempo: **3–5 dias**.
+
+2. **Design / Wireframes / UX**
+   - O que fazer: telas de login, cadastro, dashboard do cliente, painel de produtos, caixa (POS), página de pagamento, painel admin.
+   - Entregável: wireframes + protótipo navegável (foco mobile).
+   - Tempo: **4–7 dias**.
+
+3. **Arquitetura & Banco de Dados**
+   - O que fazer: modelagem multi-tenant, tabelas (usuários, empresas, produtos, vendas, pagamentos, assinaturas, roles), decisões de backup/replicação.
+   - Entregável: esquema SQL + scripts iniciais.
+   - Tempo: **3–7 dias**.
+
+4. **Back-end básico (API)**
+   - O que fazer: autenticação (JWT/sessions), CRUD de usuários/empresas, middleware multi-tenant, endpoints de produtos/estoque, endpoints de vendas, integração básica com gateway de pagamento (cobrança/assinatura).
+   - Entregável: API documentada (OpenAPI/Swagger).
+   - Tempo: **2–4 semanas** (dependendo do escopo).
+
+5. **Front-end (painel cliente)**
+   - O que fazer: telas de login/cadastro, dashboard, gestão de produtos, tela de caixa (vendas), relatórios simples.
+   - Entregável: app web responsivo (React ou similar).
+   - Tempo: **2–4 semanas**.
+
+6. **Integração Pagamentos / Assinaturas**
+   - O que fazer: integrar Mercado Pago (ou Stripe), lógica de cobrança mensal, webhook para atualizar status (pago/atrasado), bloqueio de conta se não pagar.
+   - Entregável: fluxo de assinatura ativo + testes com sandbox.
+   - Tempo: **5–10 dias**.
+
+7. **Funcionalidades adicionais (MVP vs completo)**
+   - POS com impressão de cupom, leitor de código de barras, relatórios avançados, exportação CSV/PDF, controle de usuários e permissões, histórico de entradas/saídas, backup automático.
+   - Entregável: cada item tem entrega própria.
+   - Tempo: **1–4 semanas** por conjunto de features.
+
+8. **Testes / QA / Segurança**
+   - O que fazer: testes unitários, integração, testes manuais, pentest básico, validações de rate limiting e proteção de dados.
+   - Entregável: relatório de bugs + correções.
+   - Tempo: **1–2 semanas**.
+
+9. **Deployment / Infraestrutura / CI-CD**
+   - O que fazer: dockerização, pipeline CI, deploy em VPS/Cloud, configuração SSL, backups, monitoramento.
+   - Entregável: ambiente staging + produção com docs de deploy.
+   - Tempo: **4–7 dias**.
+
+10. **Entrega / Treinamento / Documentação**
+    - O que fazer: documentação do usuário, manual de admin, treinamento rápido (vídeo ou sessão ao vivo).
+    - Entregável: docs + gravação/treinamento.
+    - Tempo: **3–5 dias**.
+
+---
+
+# Escopos e prazos sugeridos (escolha 1)
+
+### A — **MVP (lançar rápido, essencial)**
+**Funcionalidades:** cadastro/login, multi-tenant, painel básico (produtos/estoque), vendas manuais (registro de venda), relatórios simples, cobrança mensal com Mercado Pago (assinatura básica), painel admin para ver assinantes.
+**Prazos estimados (1 desenvolvedor full-stack):** **6–8 semanas**.
+**Prazos estimados (equipe pequena: 2-3 pessoas):** **3–4 semanas**.
+
+### B — **Produto Completo (pronto para vender como SaaS)**
+**Funcionalidades:** tudo do MVP + POS com cupom, leitura de código de barras, controle de caixas por usuário, relatórios financeiros avançados, exportação, integração fiscal (opcional), automações, painel admin completo, testes e segurança.
+**Prazos estimados (1 desenvolvedor):** **12–16 semanas**.
+**Prazos estimados (equipe 3 pessoas):** **6–8 semanas**.
+
+---
+
+# Quem faz o quê (papéis)
+- **Você (Product Owner)**: define regras de negócio, preços, fluxos, valida entrega.
+- **Desenvolvedor Backend**: API, DB, autenticação, integração pagamento, segurança.
+- **Desenvolvedor Frontend**: telas, UX, responsividade, integração com API.
+- **Designer UI/UX**: identidade visual, protótipos, fluxo.
+- **QA / Testador**: testes funcionais e regressão.
+- **DevOps**: infra, backups, CI/CD, monitoramento (pode ser o dev backend se necessário).
+
+> Observação: numa fase inicial alguns papéis podem ser exercidos pela mesma pessoa (ex.: full-stack).
+
+---
+
+# Recursos que você precisa providenciar (do seu lado)
+- Nome da empresa/produto, logo, cores e texto de marketing.
+- Plano de preços (quanto vai cobrar por mensalidade e o que cada plano inclui).
+- Conta do **Mercado Pago** (ou Stripe) para receber mensalidades + credenciais de API.
+- Domínio e acesso DNS (para SSL).
+- Hosting/Servidor (ou podemos sugerir e contratar para você).
+- Lista de exemplos de produtos (para popular a base de teste).
+- Dados fiscais/contratuais da empresa (para recibos).
+- Acesso ao GitHub (ou repositório) para versionamento.
+
+---
+
+# Critérios de aceitação (por marco)
+- **MVP pronto**: usuário cria conta → confirma pagamento → entra no painel → cadastra produto → registra venda → vê relatório básico.
+- **Qualidade mínima**: testes críticos passando, backup automático ativo, deploy funcional em produção com SSL.
+- **Admin**: você consegue ver/baixar lista de assinantes e bloquear/ativar contas.
+
+---
+
+# Riscos e recomendações rápidas
+- **Multi-tenant** exige cuidado com isolamento de dados — planejar desde o começo.
+- **Cobrança**: usar webhooks para automatizar bloqueio/reativação.
+- **Escalabilidade**: usar Postgres + índices e ter plano de backup.
+- **Segurança**: armazenar senha com bcrypt, proteger endpoints com rate limit e HTTPS.
+
+---
+
+# Check-list final rápido (o que vamos entregar por fase inicial)
+- Documento de requisitos + roadmap.
+- Wireframes (login, dashboard, produtos, vendas).
+- API básica + DB model.
+- Front-end mínimo funcional (login → dashboard → produtos → venda).
+- Integração com Mercado Pago sandbox.
+- Deploy em servidor com SSL.
+- Documentação mínima de uso e admin.
+
+---
+
+# Próximo passo (prático)
+Escolha um dos caminhos: **MVP** ou **Produto Completo**.
+- Se optar por **MVP**, eu já monto o **documento de requisitos + wireframe** e começo a implementar o **login + modelos DB** na primeira semana.
+- Se quiser o completo, eu abro o cronograma detalhado com milestones e marcos de pagamento (se for seu desejo contratar).
+
+Quer que eu já comece pelo **MVP** (entrega em ~6–8 semanas) e eu te envio o documento de requisitos agora mesmo?</pre>
+    <p class="note">Arquivo gerado para organização. Use este HTML para revisar e marcar progresso.</p>
+  </div>
+</body>
+</html>
